@@ -281,11 +281,14 @@ overflow: hidden;
   border-bottom-left-radius: 5px;
   border: 1px solid #555;
   cursor: pointer;
-
+  -moz-transition:color,background-color .1s ease-in;
+  -o-transition:color,background-color .1s ease-in;
+  -webkit-transition:color,background-color .1s ease-in;
+  transition:color,background-color .1s ease-in
 }
 
 
-.copy:hover {
+.copy:hover,.copy.hover {
     background-color: #a57bf2;
   color: #FFF;
 }
@@ -452,9 +455,9 @@ overflow: hidden;
 .highlight .mf {
   color: #ae81ff; }
 
-/* Literal.Number.Float */
-.highlight .mh {
-  color: #ae81ff; }
+/* Boolean */
+.highlight .bo {
+  color: #9a73e0; }
 
 /* Literal.Number.Hex */
 .highlight .mi {
@@ -547,10 +550,18 @@ overflow: hidden;
   text-decoration: none;
   font-size: 14px;
   width: 100px;
+   -moz-transition:color .1s ease-in;
+  -o-transition:color .1s ease-in;
+  -webkit-transition:color .1s ease-in;
+  transition:color .1s ease-in
 }
 
 .introduction a{
     text-decoration: none;
+     -moz-transition:color .1s ease-in;
+  -o-transition:color .1s ease-in;
+  -webkit-transition:color .1s ease-in;
+  transition:color .1s ease-in
 }
 
 section.download > ul > li > a > span:nth-child(1){
@@ -610,7 +621,7 @@ h2 {
   font-size: 32px;
 }
 
-article > h3, article > h4 {
+article > h3{
   padding-top: 24px;
 }
 article h3 {
@@ -624,4 +635,10 @@ article h3 {
   z-index: 2;
   min-height: 100%;
   padding-bottom: 32px;
+}
+article > div > h4{
+    padding-top: 0;
+  padding-left: 20px;
+  font-weight: 300;
+  font-size: 18px;
 }

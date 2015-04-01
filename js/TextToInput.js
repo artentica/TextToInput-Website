@@ -16,11 +16,11 @@ $.fn.TextToInput = function(definitionAction){
     modifiedclass : "btn-primary",
     saveclass : "btn-success",
     cancelclass : "btn-danger",
-    ToSaveclass : "generation_element_to_change",
-    modifiedtext : "",
-    savetext : "",
-    canceltext : "",
-    ToSavetext : "",
+    ToSaveclass : "btn-success",
+    modifiedtext : "Modify",
+    savetext : "Save",
+    canceltext : "Cancel",
+    ToSavetext : "Save Changes",
     modifiedglyph : "glyphicon glyphicon-pencil",
     saveglyph : "glyphicon glyphicon-floppy-disk",
     cancelglyph : "glyphicon glyphicon-ban-circle",
@@ -29,11 +29,11 @@ $.fn.TextToInput = function(definitionAction){
     savetitle : "",
     canceltitle : "",
     ToSavetitle : "",
-    UpdatedVal : ".updatedValue",
+    UpdatedVal : ".text-danger",
     UpdatingVal : ".updating_line",
-    ToUpdateLine : ".to_updating_line",
-    PrecisedFieldBDD : true,
-    PrecisedIDBDD : true,
+    ToUpdateLine : ".to_update_line",
+    PrecisedFieldBDD : false,
+    PrecisedIDBDD : false,
     notChange : ".lockValue",
     IDBDD : ".bdd_ID",
     lien : "index.html",
@@ -337,6 +337,7 @@ $.fn.TextToInput = function(definitionAction){
         CancelLine(parent);
         resetButtonMultiple(parent);
         UnlockActionCellExceptCurrent();
+
     });
         //Click on save Button if multiple line
     $(tdpersonnalised.actionCell).on('click', "button:nth-child(2)" ,function(){
