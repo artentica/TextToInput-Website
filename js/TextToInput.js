@@ -7,9 +7,8 @@ $.fn.TextToInput = function(definitionAction){
 
     //Default parameters
     TextToInput_defaultSettings = {
-    mainButtonDiv  : "#action_modified",
+    mainButtonDiv  : "#mainButtonDiv",
     actionCell : ".actionCell",
-    /*nameFinalButton:"final_button",*/
     controleUniqueButton : true,
     dataBDD : "name_bdd",
     buttunClass : "btn",
@@ -20,7 +19,7 @@ $.fn.TextToInput = function(definitionAction){
     modifiedtext : "Modify",
     savetext : "Save",
     canceltext : "Cancel",
-    ToSavetext : "Save Changes",
+    ToSavetext : "Valid Changes",
     modifiedglyph : "glyphicon glyphicon-pencil",
     saveglyph : "glyphicon glyphicon-floppy-disk",
     cancelglyph : "glyphicon glyphicon-ban-circle",
@@ -29,7 +28,7 @@ $.fn.TextToInput = function(definitionAction){
     savetitle : "",
     canceltitle : "",
     ToSavetitle : "",
-    UpdatedVal : ".text-danger",
+    UpdatedVal : ".text-changed",
     UpdatingVal : ".updating_line",
     ToUpdateLine : ".to_update_line",
     PrecisedFieldBDD : false,
@@ -96,7 +95,7 @@ $.fn.TextToInput = function(definitionAction){
 
     //Add button on each line for multiple button & hide the good ones
     function addButtonLine(){
-        var obj = $(tdpersonnalised.actionCell);
+        var obj = myTable.find(tdpersonnalised.actionCell);
         $.each(obj,function(){
             $(this).append("<button title='"+tdpersonnalised.modifiedtitle+"' class=\""+ tdpersonnalised.buttunClass+ " "  + tdpersonnalised.modifiedclass +"\"><span class=\""+ tdpersonnalised.modifiedglyph +"\" aria-hidden=\"true\"></span></button>");
 
@@ -227,6 +226,9 @@ $.fn.TextToInput = function(definitionAction){
     function EnableSaveBDDButton(nb){
         $(tdpersonnalised.mainButtonDiv).children("button:nth-child(" + nb + ")").attr("disabled",false);
     }
+    function DisableSaveBDDButton(nb){
+        $(tdpersonnalised.mainButtonDiv).children("button:nth-child(" + nb + ")").attr("disabled","disabled");
+    }
 
     function buildChangeObject(){
         (tdpersonnalised.PrecisedFieldBDD)?(tdpersonnalised.PrecisedIDBDD)?buildWithID():buildWithoutID():(tdpersonnalised.PrecisedIDBDD)?buildNODataID():buildNOData();
@@ -308,6 +310,9 @@ $.fn.TextToInput = function(definitionAction){
                 $(this).removeClass(tdpersonnalised.UpdatedVal.replace(".",""));
             });
             $(this).removeClass(tdpersonnalised.ToUpdateLine.replace(".",""));
+            (tdpersonnalised.controleUniqueButton)?temp = 4:temp = 1;
+            DisableSaveBDDButton(temp);
+
         });
     }
 

@@ -13,3 +13,24 @@ $(window).on('resize load', function() {
     centerMain();
 });
 
+function notify(text) {
+
+    var notification = $('<li />').text(text).css({
+      left: 320
+    })
+    notifications = $('.notifications');
+    notifications.append(notification);
+    notification.animate({
+      left: 0
+    }, 300, function() {
+
+      $(this).delay(3000).animate({
+        left: 320
+      }, 200, function() {
+
+        $(this).slideUp(100, function() {
+          $(this).remove()
+        })
+      })
+    })
+  }
