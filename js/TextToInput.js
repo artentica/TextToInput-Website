@@ -1,7 +1,7 @@
 $.fn.TextToInput = function(definitionAction){
 
     //Object table
-    var myTable = $(this);
+    //var myTable = $(this);
     //Version plugin
 
 
@@ -28,7 +28,7 @@ $.fn.TextToInput = function(definitionAction){
     savetitle : "",
     canceltitle : "",
     ToSavetitle : "",
-    UpdatedVal : ".text-changed",
+    UpdatedVal : ".text-danger",
     UpdatingVal : ".updating_line",
     ToUpdateLine : ".to_update_line",
     PrecisedFieldBDD : false,
@@ -36,7 +36,8 @@ $.fn.TextToInput = function(definitionAction){
     notChange : ".lockValue",
     IDBDD : ".bdd_ID",
     lien : "index.html",
-    saveOnChangeTd:true,
+    myTable : $(this),
+    saveOnChange:true,
     SuccesSend: function () {alert("Sending information success")},
     ErrorSend: function () {alert("Sending information error")},
     SendJSON: function (json) {
@@ -69,6 +70,9 @@ $.fn.TextToInput = function(definitionAction){
         (tdpersonnalised.controleUniqueButton)?addMainButonsUnique():addMainButonsMultiple();
     }
 
+  //tdpersonnalised["myTable"] = $(this);
+
+
     //Add of buttons if Unique Button & hide good one(s)
     function addMainButonsUnique(){
         var obj = $(tdpersonnalised.mainButtonDiv);
@@ -95,7 +99,7 @@ $.fn.TextToInput = function(definitionAction){
 
     //Add button on each line for multiple button & hide the good ones
     function addButtonLine(){
-        var obj = myTable.find(tdpersonnalised.actionCell);
+        var obj = tdpersonnalised.myTable.find(tdpersonnalised.actionCell);
         $.each(obj,function(){
             $(this).append("<button title='"+tdpersonnalised.modifiedtitle+"' class=\""+ tdpersonnalised.buttunClass+ " "  + tdpersonnalised.modifiedclass +"\"><span class=\""+ tdpersonnalised.modifiedglyph +"\" aria-hidden=\"true\"></span></button>");
 
@@ -109,20 +113,20 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function LockActionCellExceptCurrent(e){
-        $(tdpersonnalised.actionCell).not(e).children("button:nth-child(1)").each(function(){
+        tdpersonnalised.myTable.find(tdpersonnalised.actionCell).not(e).children("button:nth-child(1)").each(function(){
             $(this).attr('disabled','disabled');
         });
     }
 
     function UnlockActionCellExceptCurrent(){
-        $(tdpersonnalised.actionCell).children("button:nth-child(1)").each(function(){
+        tdpersonnalised.myTable.find(tdpersonnalised.actionCell).children("button:nth-child(1)").each(function(){
             $(this).attr('disabled',false);
         });
     }
 
     function modifieLine(e){
         var parent = e.parent();
-        if(!tdpersonnalised.saveOnChangeTd) LockActionCellExceptCurrent(parent);
+        if(!tdpersonnalised.saveOnChange) LockActionCellExceptCurrent(parent);
         else saveOnChange();
         e.hide();
         parent.parent().addClass("updating_line");
@@ -131,7 +135,7 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function saveOnChange(){
-        wheelSave($(tdpersonnalised.UpdatingVal).find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange));
+        wheelSave(tdpersonnalised.myTable.find(tdpersonnalised.UpdatingVal).find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange));
         if($(tdpersonnalised.UpdatingVal)[0]) resetButtonMultiple($(tdpersonnalised.UpdatingVal));
     }
 
@@ -142,7 +146,8 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function SaveChange(e){
-        var val = e.children("input").val().replace('"', '\"');
+        var val = e.children("input").val();
+        if(typeof val != "undefined" && val != "")if(val.indexOf('"') != -1)val = val.replace('"', '\"');
         var oldval = e.children("input").data("oldval");
         InputToText(e,val);
         if(val!=oldval) e.addClass(tdpersonnalised.UpdatedVal.replace(".",""));
@@ -176,14 +181,14 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function cancelAllLine(){
-        myTable.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).each(function(){
+        tdpersonnalised.myTable.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).each(function(){
             var oldval = $(this).children("input").data("oldval");
             InputToText($(this),oldval);
         });
     }
 
     function saveAllLine(){
-        myTable.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).each(function(){
+        tdpersonnalised.myTable.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).each(function(){
             var oldval = $(this).children("input").data("oldval");
             var val = $(this).children("input").val().replace('"', '\"');
             InputToText($(this),val);
@@ -204,7 +209,7 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function modifAllLine(){
-        transformInInput(myTable);
+        transformInInput(tdpersonnalised.myTable);
     }
 
     function hideModifAndSaveButtunUnique(e){
@@ -238,7 +243,7 @@ $.fn.TextToInput = function(definitionAction){
     function buildWithoutID(){
         var object = {};
         var infos = [];
-        myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
+        tdpersonnalised.myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
             $(this).find("td,li").not(tdpersonnalised.actionCell).each(function() {
                 var id = $(this).data("name_bdd");
                 var value = $(this).text();
@@ -254,7 +259,7 @@ $.fn.TextToInput = function(definitionAction){
     function buildWithID(){
         var object = {};
         var infos = [];
-        myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
+        tdpersonnalised.myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
             object[String($(this).children(tdpersonnalised.IDBDD).data("name_bdd"))] = $(this).children(tdpersonnalised.IDBDD).text();
             $(this).find("td"+tdpersonnalised.UpdatedVal+",li"+tdpersonnalised.UpdatedVal).not(tdpersonnalised.actionCell).not(tdpersonnalised.IDBDD).each(function() {
                 var id = $(this).data("name_bdd");
@@ -271,7 +276,7 @@ $.fn.TextToInput = function(definitionAction){
     function buildNOData(){
         var object = {};
         var infos = [];
-        myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
+        tdpersonnalised.myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
             $(this).find("td,li").not(tdpersonnalised.actionCell).each(function(i) {
                 var value = $(this).text();
                 object[i]=value;
@@ -286,7 +291,7 @@ $.fn.TextToInput = function(definitionAction){
     function buildNODataID(){
         var object = {};
         var infos = [];
-        myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
+        tdpersonnalised.myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
             object["ID"] = $(this).children(tdpersonnalised.IDBDD).text();
             $(this).find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.IDBDD).each(function(i) {
                 var value = $(this).text();
@@ -305,7 +310,7 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function resetChange(){
-        myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
+        tdpersonnalised.myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
             $(this).find(tdpersonnalised.UpdatedVal).each(function(){
                 $(this).removeClass(tdpersonnalised.UpdatedVal.replace(".",""));
             });
@@ -333,11 +338,11 @@ $.fn.TextToInput = function(definitionAction){
 
     //Trigger event
         //Click on modified Button if multiple line
-    $(tdpersonnalised.actionCell).on('click', "button:nth-child(1)" ,function(){
+    tdpersonnalised.myTable.find(tdpersonnalised.actionCell).on('click', "button:nth-child(1)" ,function(){
         modifieLine($(this));
     });
         //Click on cancel Button if multiple line
-    $(tdpersonnalised.actionCell).on('click', "button:nth-child(3)" ,function(){
+    tdpersonnalised.myTable.find(tdpersonnalised.actionCell).on('click', "button:nth-child(3)" ,function(){
         var parent = $(this).parents("tr,ul,ol");
         CancelLine(parent);
         resetButtonMultiple(parent);
@@ -345,7 +350,7 @@ $.fn.TextToInput = function(definitionAction){
 
     });
         //Click on save Button if multiple line
-    $(tdpersonnalised.actionCell).on('click', "button:nth-child(2)" ,function(){
+    tdpersonnalised.myTable.find(tdpersonnalised.actionCell).on('click', "button:nth-child(2)" ,function(){
        var parent = $(this).parents("tr,ul,ol"); wheelSave(parent.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange));
         resetButtonMultiple(parent);
         UnlockActionCellExceptCurrent();

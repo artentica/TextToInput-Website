@@ -802,3 +802,20 @@ article {
   margin: 1em 0 0 0;
   color: #888;
 }
+.together pre{
+  margin: 0;
+  border: inherit;
+  border-bottom-color: #5E5E5E;;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+
+}
+
+.together .highlight:last-child{
+  margin-bottom: 20px;
+}
+
+
+}.together .highlight:first-child{
+  margin-top: 20px;
+}
