@@ -23,12 +23,32 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-link:before {
-	content: "\e9cb";
+.icon-pencil:before {
+	content: "\e905";
+}
+
+.icon-pencil2:before {
+	content: "\e906";
 }
 
 .icon-download:before {
 	content: "\e960";
+}
+
+.icon-floppy-disk:before {
+	content: "\e962";
+}
+
+.icon-download2:before {
+	content: "\e9c5";
+}
+
+.icon-link:before {
+	content: "\e9cb";
+}
+
+.icon-blocked:before {
+	content: "\ea0e";
 }
 
 .icon-circle-down:before {
@@ -38,7 +58,6 @@
 .icon-github:before {
 	content: "\eab1";
 }
-
 .center{
     text-align: center;
 }
