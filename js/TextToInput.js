@@ -10,7 +10,6 @@ $.fn.TextToInput = function(definitionAction){
     mainButtonDiv  : "#mainButtonDiv",
     actionCell : ".actionCell",
     controleUniqueButton : true,
-    dataBDD : "name_bdd",
     buttunClass : "btn",
     modifiedclass : "btn-primary",
     saveclass : "btn-success",
@@ -31,11 +30,11 @@ $.fn.TextToInput = function(definitionAction){
     UpdatedVal : ".text-danger",
     UpdatingVal : ".updating_line",
     ToUpdateLine : ".to_update_line",
-    PrecisedFieldBDD : false,
-    PrecisedIDBDD : false,
+    PrecisedFieldDB : false,
+    IDDB : "",
+    dataDB : "name_DB",
     notChange : ".lockValue",
-    IDBDD : ".bdd_ID",
-    lien : "index.html",
+    link : "index.html",
     myTable : $(this),
     saveOnChange:true,
     SuccesSend: function () {alert("Sending information success")},
@@ -43,7 +42,7 @@ $.fn.TextToInput = function(definitionAction){
     SendJSON: function (json) {
         $.ajax({
             type: "POST",
-            url: tdpersonnalised.lien,
+            url: tdpersonnalised.link,
             data: json,
         }).success(function(){
             tdpersonnalised.SuccesSend();
@@ -51,7 +50,6 @@ $.fn.TextToInput = function(definitionAction){
         }).error(function(){
             tdpersonnalised.ErrorSend();
         });},
-    errorMsgFunction : "Appel de la page non réussie"
   };
 
     //Definition of the version
@@ -135,7 +133,7 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function saveOnChange(){
-        wheelSave(tdpersonnalised.myTable.find(tdpersonnalised.UpdatingVal).find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange));
+        wheelSave(tdpersonnalised.myTable.find(tdpersonnalised.UpdatingVal).find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).not(tdpersonnalised.IDDB));
         if($(tdpersonnalised.UpdatingVal)[0]) resetButtonMultiple($(tdpersonnalised.UpdatingVal));
     }
 
@@ -149,7 +147,9 @@ $.fn.TextToInput = function(definitionAction){
         var val = e.children("input").val();
         if(typeof val != "undefined" && val != "")if(val.indexOf('"') != -1)val = val.replace('"', '\"');
         var oldval = e.children("input").data("oldval");
+        if (tdpersonnalised.IDDB=="" && e.data("oldval")=== undefined )e.attr("data-oldVal",oldval);
         InputToText(e,val);
+
         if(val!=oldval) e.addClass(tdpersonnalised.UpdatedVal.replace(".",""));
         addUpdateLine();
     }
@@ -161,14 +161,14 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function CancelLine(e){
-        e.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).each(function(i,e){
+        e.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).not(tdpersonnalised.IDDB).each(function(i,e){
             var oldval = $(e).children("input").data("oldval");
             InputToText($(e),oldval)
         });
     }
 
     function transformInInput(target){
-        target.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).each(function(){
+        target.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).not(tdpersonnalised.IDDB).each(function(){
             var temp = $(this).text().replace('"', '\"');
             $(this).text("");
             $(this).append("<input data-oldVal='"+ temp +"' value='"+ temp +"'>");
@@ -181,16 +181,17 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function cancelAllLine(){
-        tdpersonnalised.myTable.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).each(function(){
+        tdpersonnalised.myTable.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).not(tdpersonnalised.IDDB).each(function(){
             var oldval = $(this).children("input").data("oldval");
             InputToText($(this),oldval);
         });
     }
 
     function saveAllLine(){
-        tdpersonnalised.myTable.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).each(function(){
+        tdpersonnalised.myTable.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).not(tdpersonnalised.IDDB).each(function(){
             var oldval = $(this).children("input").data("oldval");
             var val = $(this).children("input").val().replace('"', '\"');
+        if (tdpersonnalised.IDDB=="" && $(this).data("oldval")=== undefined )$(this).attr("data-oldVal",oldval);
             InputToText($(this),val);
             if(val!=oldval) $(this).addClass(tdpersonnalised.UpdatedVal.replace(".",""));
         });
@@ -236,33 +237,45 @@ $.fn.TextToInput = function(definitionAction){
     }
 
     function buildChangeObject(){
-        (tdpersonnalised.PrecisedFieldBDD)?(tdpersonnalised.PrecisedIDBDD)?buildWithID():buildWithoutID():(tdpersonnalised.PrecisedIDBDD)?buildNODataID():buildNOData();
+        (tdpersonnalised.PrecisedFieldDB)?(tdpersonnalised.IDDB!="")?buildWithID():buildWithoutID():(tdpersonnalised.IDDB!="")?buildNODataID():buildNOData();
 
     }
 
     function buildWithoutID(){
         var object = {};
+        var old = {};
         var infos = [];
         tdpersonnalised.myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
             $(this).find("td,li").not(tdpersonnalised.actionCell).each(function() {
-                var id = $(this).data("name_bdd");
-                var value = $(this).text();
-                object[String(id)] = value;
+                var id = $(this).data(tdpersonnalised.dataDB.toLowerCase());
+                if($(this).hasClass(tdpersonnalised.UpdatedVal.replace(".",""))){
+                  var value = $(this).text();
+                  object[String(id)] = value;
+                }
+
+                var value_new = $(this).attr("data-oldVal");
+               // console.log(value_new);
+                old[String(id)] = value_new;
             });
-            infos.push(object);
+            var temp = new Array(old,object);
+            infos.push(temp);
+            temp = {};
+            old = {};
             object = {};
         });
         JsonForString(infos);
-        console.log(infos);
+        //console.log(infos);
     }
 
     function buildWithID(){
         var object = {};
         var infos = [];
         tdpersonnalised.myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
-            object[String($(this).children(tdpersonnalised.IDBDD).data("name_bdd"))] = $(this).children(tdpersonnalised.IDBDD).text();
-            $(this).find("td"+tdpersonnalised.UpdatedVal+",li"+tdpersonnalised.UpdatedVal).not(tdpersonnalised.actionCell).not(tdpersonnalised.IDBDD).each(function() {
-                var id = $(this).data("name_bdd");
+            object[String(tdpersonnalised.IDDB.replace(".",""))] = $(this).children(tdpersonnalised.IDDB).text();
+           //+tdpersonnalised.UpdatedVal
+
+$(this).find("td"+tdpersonnalised.UpdatedVal,"li"+tdpersonnalised.UpdatedVal).not(tdpersonnalised.actionCell).not(tdpersonnalised.IDDB).each(function() {
+                var id = $(this).data(tdpersonnalised.dataDB.toLowerCase());
                 var value = $(this).text();
                 object[String(id)] = value;
             });
@@ -275,27 +288,38 @@ $.fn.TextToInput = function(definitionAction){
 
     function buildNOData(){
         var object = {};
+        var old = {};
         var infos = [];
         tdpersonnalised.myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
             $(this).find("td,li").not(tdpersonnalised.actionCell).each(function(i) {
-                var value = $(this).text();
-                object[i]=value;
+                if($(this).hasClass(tdpersonnalised.UpdatedVal.replace(".",""))){
+                  var value = $(this).text();
+                  object[String(i)] = value;
+                }
+                var value_new = $(this).attr("data-oldVal");
+                console.log(value_new);
+                old[String(i)] = value_new;
             });
-            infos.push(object);
+            var temp = new Array(old,object);
+            infos.push(temp);
+            temp = {};
+            old = {};
             object = {};
         });
         JsonForString(infos);
-        console.log(infos);
+        //console.log(infos);
     }
 
     function buildNODataID(){
         var object = {};
         var infos = [];
         tdpersonnalised.myTable.find(tdpersonnalised.ToUpdateLine).each(function(){
-            object["ID"] = $(this).children(tdpersonnalised.IDBDD).text();
-            $(this).find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.IDBDD).each(function(i) {
-                var value = $(this).text();
-                object[i]=value;
+            object[String(tdpersonnalised.IDDB.replace(".",""))] = $(this).children(tdpersonnalised.IDDB).text();
+            $(this).find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.IDDB).each(function(i) {
+                if($(this).hasClass(tdpersonnalised.UpdatedVal.replace(".",""))){
+                  var value = $(this).text();
+                  object[i]=value;
+                }
             });
             infos.push(object);
             object = {};
@@ -317,7 +341,6 @@ $.fn.TextToInput = function(definitionAction){
             $(this).removeClass(tdpersonnalised.ToUpdateLine.replace(".",""));
             (tdpersonnalised.controleUniqueButton)?temp = 4:temp = 1;
             DisableSaveBDDButton(temp);
-
         });
     }
 
@@ -351,7 +374,7 @@ $.fn.TextToInput = function(definitionAction){
     });
         //Click on save Button if multiple line
     tdpersonnalised.myTable.find(tdpersonnalised.actionCell).on('click', "button:nth-child(2)" ,function(){
-       var parent = $(this).parents("tr,ul,ol"); wheelSave(parent.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange));
+       var parent = $(this).parents("tr,ul,ol"); wheelSave(parent.find("td,li").not(tdpersonnalised.actionCell).not(tdpersonnalised.notChange).not(tdpersonnalised.IDDB));
         resetButtonMultiple(parent);
         UnlockActionCellExceptCurrent();
     });

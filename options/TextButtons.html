@@ -61,18 +61,17 @@ Ceci se passe de commentaire.
 </ul>
 
         <article>
-          <h2>Lock Values options</h2>
+          <h2>Text Buttons options</h2>
           <div class="reference">
   <h3>Variable</h3>
-  <p><code>modifiedglyph saveglyph, cancelglyph , ToSaveglyph</code></p>
+  <p><code>modifiedtext, savetext, canceltext, ToSavetext</code></p>
   <h3>Default</h3>
-  <p><code>"glyphicon glyphicon-pencil","glyphicon glyphicon-floppy-disk","glyphicon glyphicon-ban-circle","glyphicon glyphicon-saved"</code></p>
+  <p><code>" Modify"," Save"," Cancel"," Valid Changes"</code></p>
   <h3>Possible Values</h3>
-  <p>String (representing class)</p>
+  <p>String</p>
 </div>
-    <p>These are the bootstrap classes to put icons before the text in the buttons. You can of course put more convenient for you.<br>
-      In the example below I used other icons from another library.
-    </p>
+    <p>This will be the text in each button.<br>
+      You can change it if you want another language and / or another meanning.</p>
 <div class="together">
 <div class="highlight">
   <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div </span><span class="k">id</span><span class="nb">=</span><span class="s">"basicTable"</span><span class="nt">&gt;
@@ -108,11 +107,11 @@ Ceci se passe de commentaire.
 
 <div class="highlight">
   <pre><code class="language-html" data-lang="html"><span class="nb">$(</span><span class="s">'#basicTable'</span><span class="nb">).</span><span class="k">TextToInput</span><span class="nb">({</span>
-    <span class="k">mainButtonDiv</span>  <span class="nb">: </span><span class="s">"#basicTable div:nth-child(1)"</span><span class="nb">,</span>
-   <!-- <span class="k">modifiedglyph</span> <span class="nb">: </span><span class="s">"icon-pencil2"</span><span class="nb">,</span>
-    <span class="k">saveglyph</span> <span class="nb">: </span><span class="s">"icon-floppy-disk"</span><span class="nb">,</span>
-    <span class="k">cancelglyph</span> <span class="nb">: </span><span class="s">"icon-blocked"</span><span class="nb">,</span>
-    <span class="k">ToSaveglyph</span> <span class="nb">: </span><span class="s">"icon-download2"</span><span class="nb">, </span> -->
+    <span class="k">mainButtonDiv</span> <span class="nb">: </span><span class="s">"#basicTable div:nth-child(1)"</span><span class="nb">,</span>
+    <span class="k">modifiedtext</span><span class="nb"> :</span> <span class="s">" Change"</span><span class="nb">,</span>
+    <span class="k">savetext</span><span class="nb"> :</span> <span class="s">" Let's save"</span><span class="nb">,</span>
+    <span class="k">canceltext</span><span class="nb"> :</span> <span class="s">" No I change my mind"</span><span class="nb">,</span>
+    <span class="k">ToSavetext</span><span class="nb"> :</span> <span class="s">" Aaaand let's validate"</span>
 <span class="nb">});</span></code></pre>
 </div>
 </div>
@@ -167,7 +166,10 @@ Ceci se passe de commentaire.
     <script type="text/javascript">
 $('#basicTable').TextToInput({
     mainButtonDiv  : "#basicTable div:nth-child(1)",
-
+    modifiedtext : " Change",
+    savetext : " Let's save",
+    canceltext : " No I have change my mind",
+    ToSavetext : " Aaaand let's validate"
 });
     </script>
 

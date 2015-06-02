@@ -61,17 +61,17 @@ Ceci se passe de commentaire.
 </ul>
 
         <article>
-          <h2>Icons options</h2>
+          <h2>Title Buttons options</h2>
           <div class="reference">
   <h3>Variable</h3>
-  <p><code>modifiedglyph saveglyph, cancelglyph , ToSaveglyph</code></p>
+  <p><code>modifiedtitle, savetitle, canceltitle, ToSavetitle</code></p>
   <h3>Default</h3>
-  <p><code>"glyphicon glyphicon-pencil","glyphicon glyphicon-floppy-disk","glyphicon glyphicon-ban-circle","glyphicon glyphicon-saved"</code></p>
+  <p><code>"","","",""</code></p>
   <h3>Possible Values</h3>
-  <p>String (representing class)</p>
+  <p>String</p>
 </div>
-    <p>These are the bootstrap classes to put icons before the text in the buttons. You can of course put more convenient for you.<br>
-      In the example below I used other icons from another library.
+    <p>By default no title is on the buttons.<br>
+      You can add if you wish as I do below.
     </p>
 <div class="together">
 <div class="highlight">
@@ -108,11 +108,11 @@ Ceci se passe de commentaire.
 
 <div class="highlight">
   <pre><code class="language-html" data-lang="html"><span class="nb">$(</span><span class="s">'#basicTable'</span><span class="nb">).</span><span class="k">TextToInput</span><span class="nb">({</span>
-    <span class="k">mainButtonDiv</span>  <span class="nb">: </span><span class="s">"#basicTable div:nth-child(1)"</span><span class="nb">,</span>
-    <span class="k">modifiedglyph</span> <span class="nb">: </span><span class="s">"icon-pencil2"</span><span class="nb">,</span>
-    <span class="k">saveglyph</span> <span class="nb">: </span><span class="s">"icon-floppy-disk"</span><span class="nb">,</span>
-    <span class="k">cancelglyph</span> <span class="nb">: </span><span class="s">"icon-blocked"</span><span class="nb">,</span>
-    <span class="k">ToSaveglyph</span> <span class="nb">: </span><span class="s">"icon-download2"</span><span class="nb">, </span>
+    <span class="k">mainButtonDiv</span> <span class="nb">: </span><span class="s">"#basicTable div:nth-child(1)"</span><span class="nb">,</span>
+    <span class="k">modifiedtitle</span><span class="nb"> :</span> <span class="s">"Change"</span><span class="nb">,</span>
+    <span class="k">savetitle</span><span class="nb"> :</span> <span class="s">"Let<xmp>&apos;</xmp>s save"</span><span class="nb">,</span><span class="cl">//I replaced the apostrophe by the html code "<xmp>&apos;</xmp>" to avoid conflict, otherwise your title will stop at the first '</span>
+    <span class="k">canceltitle</span><span class="nb"> :</span> <span class="s">"No I have change my mind"</span><span class="nb">,</span>
+    <span class="k">ToSavetitle</span><span class="nb"> :</span> <span class="s">"Aaaand let<xmp>&apos;</xmp>s validate"</span>
 <span class="nb">});</span></code></pre>
 </div>
 </div>
@@ -166,11 +166,11 @@ Ceci se passe de commentaire.
 
     <script type="text/javascript">
 $('#basicTable').TextToInput({
-    mainButtonDiv  : "#basicTable div:nth-child(1)",
-    modifiedglyph : "icon-pencil2",
-    saveglyph : "icon-floppy-disk",
-    cancelglyph : "icon-blocked",
-    ToSaveglyph : "icon-download2",
+    mainButtonDiv : "#basicTable div:nth-child(1)",
+    modifiedtitle : "Change",
+    savetitle : "Let&apos;s save",
+    canceltitle : "No I have change my mind",
+    ToSavetitle : "Aaaand let&apos;s validate"
 });
     </script>
 

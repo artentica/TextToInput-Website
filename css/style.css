@@ -838,3 +838,13 @@ article {
 }.together .highlight:first-child{
   margin-top: 20px;
 }
+
+xmp{
+    display: inline;
+}
+
+.result{
+  background-color: #DDD;
+  text-align: center;
+  margin: 8px;
+}

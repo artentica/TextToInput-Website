@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Ceci se passe de commentaire.
+-->
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+ <meta http-equiv="Content-Language" content="en" />
+ <meta name="author" content="Riouallon Vincent" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Text To Input</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+  <div class="container">
+    <header>
+  <div class="inner">
+    <h1><a href="index.html">TextToInput</a></h1>
+    <nav class="on-options">
+      <ul>
+        <li><a href="../index.html" class="nav-about">About</a></li>
+        <li><a href="../examples.html" class="nav-examples">Examples</a></li>
+        <li><a href="../API.html" class="nav-options">API</a></li>
+      </ul>
+    </nav>
+  </div>
+
+</header>
+
+    <main>
+        <ul class="subsection-nav api-nav on-waypoint">
+  <li>
+    <a href="" class="onpage">TextToInput</a>
+    <h3 class="subheading">Options</h3>
+    <ul>
+      <li><a href="options/mainButtonsdiv.html">Main Buttons div</a></li>
+      <li><a>Type of control</a></li>
+      <li><a>Lock Values</a></li>
+      <li><a>Class Buttons</a></li>
+      <li><a>Icons Buttons</a></li>
+      <li><a>Text Bttons</a></li>
+      <li><a>Title Buttons</a></li>
+      <li><a>dataBDD</a></li>
+      <li><a>Target Link</a></li>
+      <li><a>Specific Class</a></li>
+
+    </ul>
+    <h3 class="subheading">Functions</h3>
+    <ul>
+      <li><a>SendJSON</a></li>
+      <li><a>ErrorSend</a></li>
+      <li><a>SuccesSend</a></li>
+    </ul>
+  </li>
+
+</ul>
+
+        <article>
+
+          <h2>Specific Class options</h2>
+
+<p>This parameter allows you to tell the plugin not to turn of the text into "input" and therefore do not change this field.</p>
+    <div class="reference">
+  <h3>Variable</h3>
+  <p><code>notChange</code></p>
+  <h3>Default</h3>
+  <p><code>.lockValue</code></p>
+  <h3>Possible Values</h3>
+  <p>class or id (not recommended) or even CSS path</p>
+</div>
+    <p>You can leave the default value no matter how many times you use the plugin on the same page. You can use this class to the fields that must remain unchanged.<br>
+The class "actionCell" (the default value of "actionCell") is considered as a LockValue.
+For more information on the class "actionCell", for more information go below.<br>
+<span style="font-weight: 700;">Warning</span>: I reminds you that javascript is a client language, it is not secure, remember to check / ignore some values if you made inclusion in a database.</p>
+
+
+<p style="margin-top:25px">It is this parameter that allows to place the text buttons changes when one decides to disable the "controleUniqueButton". To see how this mode works refer to the page: "Type of control".</p>
+    <div class="reference">
+  <h3>Variable</h3>
+  <p><code>actionCell</code></p>
+  <h3>Default</h3>
+  <p><code>".actionCell"</code></p>
+  <h3>Possible Values</h3>
+  <p>class or id (not recommended) or even CSS path</p>
+</div>
+
+<div class="together">
+<div class="highlight">
+  <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div </span><span class="k">id</span><span class="nb">=</span><span class="s">"MyTableLockValue"</span><span class="nt">&gt;
+   &lt;div </span><span class="k">id</span><span class="nb">=</span><span class="s">"tableMainButton"</span><span class="nt">&gt; &lt;/div&gt;
+   &lt;table class="table"&gt;
+       &lt;thead&gt;
+         &lt;tr&gt;
+           &lt;th&gt;</span><span class="nb">Action</span><span class="nt">&lt;/th&gt;
+           &lt;th&gt;</span><span class="nb">First Name</span><span class="nt">&lt;/th&gt;
+           &lt;th&gt;</span><span class="nb">Last Name</span><span class="nt">&lt;/th&gt;
+           &lt;th&gt;</span><span class="nb">Username</span><span class="nt">&lt;/th&gt;
+         &lt;/tr&gt;
+       &lt;/thead&gt;
+       &lt;tbody&gt;
+         &lt;tr&gt;
+           &lt;td </span><span class="k">class</span><span class="nb">=</span><span class="s">"actionCell"</span><span class="nt">&gt;&lt;/td&gt;
+           &lt;td </span><span class="k">class</span><span class="nb">=</span><span class="s">"lockValue"</span><span class="nt">&gt;</span><span class="nb">Vincent</span><span class="nt">&lt;/td&gt;
+           &lt;td&gt;</span><span class="nb">Riouallon</span><span class="nt">&lt;/td&gt;
+           &lt;td&gt;</span><span class="nb">@VRiouallon</span><span class="nt">&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+           &lt;td </span><span class="k">class</span><span class="nb">=</span><span class="s">"actionCell"</span><span class="nt">&gt;&lt;/td&gt;
+           &lt;td&gt;</span><span class="nb">Rémi</span><span class="nt">&lt;/td&gt;
+           &lt;td </span><span class="k">class</span><span class="nb">=</span><span class="s">"lockValue"</span><span class="nt">&gt;</span><span class="nb">Collignon</span><span class="nt">&lt;/td&gt;
+           &lt;td&gt;</span><span class="nb">Miton</span><span class="nt">&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+           &lt;td </span><span class="k">class</span><span class="nb">=</span><span class="s">"actionCell"</span><span class="nt">&gt;&lt;/td&gt;
+           &lt;td </span><span class="k">class</span><span class="nb">=</span><span class="s">"lockValue"</span><span class="nt">&gt;</span><span class="nb">Gilles</span><span class="nt">&lt;/td&gt;
+           &lt;td </span><span class="k">class</span><span class="nb">=</span><span class="s">"lockValue"</span><span class="nt">&gt;</span><span class="nb">Biannic</span><span class="nt">&lt;/td&gt;
+           &lt;td&gt;</span><span class="nb">GillouBZH</span><span class="nt">&lt;/td&gt;
+         &lt;/tr&gt;
+       &lt;/tbody&gt;
+     &lt;/table&gt;
+&lt;/div&gt;</span></code></pre>
+</div>
+<div class="highlight">
+  <pre><code class="language-html" data-lang="html"><span class="nb">$(</span><span class="s">'#MyTableLockValue'</span><span class="nb">).</span><span class="k">TextToInput</span><span class="nb">({</span>
+        <span class="k">mainButtonDiv</span> <span class="nb"> :</span> <span class="s">"#tableMainButton"</span><span class="nb">,</span>
+        <span class="k">controleUniqueButton</span> <span class="nb">: </span><span class="bo">false</span>
+<span class="nb">});</span></code></pre>
+</div>
+</div>
+
+
+<div id="MyTableLockValue" class="bootstrap">
+  <div id="tableMainButton"></div>
+  <table class="table">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="actionCell"></td>
+          <td class="lockValue">Vincent</td>
+          <td>Riouallon</td>
+          <td>@VRiouallon</td>
+        </tr>
+        <tr>
+          <td class="actionCell"></td>
+          <td>Rémi</td>
+          <td class="lockValue">Collignon</td>
+          <td>Miton</td>
+        </tr>
+        <tr>
+          <td class="actionCell"></td>
+          <td class="lockValue">Gilles</td>
+          <td class="lockValue">Biannic</td>
+          <td>GillouBZH</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+
+
+<div class="together">
+<div class="highlight">
+  <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div </span><span class="k">id</span><span class="nb">=</span><span class="s">"basicList"</span><span class="nt">&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;h3&gt;</span><span class="nb">Title 1</span><span class="nt">&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;</span><span class="nb">Vincent</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">Riouallon</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">@VRiouallon</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">22 years old</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">vincent.riouallon@anemail.com</span><span class="nt">&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h3&gt;</span><span class="nb">Title 2</span><span class="nt">&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;</span><span class="nb">Rémi</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">Collignon</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">Miton</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">21 years old</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">remi.collignon@anemail.com</span><span class="nt">&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h3&gt;</span><span class="nb">Title 3</span><span class="nt">&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;</span><span class="nb">Gilles</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">Biannic</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">GillouBZH</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">20 years old</span><span class="nt">&lt;/li&gt;
+    &lt;li&gt;</span><span class="nb">gilles.biannic@anemail.com</span><span class="nt">&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</span></code></pre>
+</div>
+<div class="highlight">
+  <pre><code class="language-html" data-lang="html"><span class="nb">$(</span><span class="s">'#basicList'</span><span class="nb">).</span><span class="k">TextToInput</span><span class="nb">({</span>
+    <span class="k">mainButtonDiv</span>  <span class="nb">: </span><span class="s">"#basicList div:nth-child(1)"</span><span class="nb">,</span>
+    <span class="k">notChange</span><span class="nb"> :</span> <span class="s">"#basicList ul li:nth-child(odd)"
+</span><span class="nb">});</span></code></pre>
+</div>
+</div>
+<div id="basicList" class="bootstrap">
+  <div></div>
+  <h3>Title 1</h3>
+  <ul>
+    <li>Vincent</li>
+    <li>Riouallon</li>
+    <li>@VRiouallon</li>
+    <li>22 years old</li>
+    <li>vincent.riouallon@anemail.com</li>
+  </ul>
+
+  <h3>Title 2</h3>
+  <ul>
+    <li>Rémi</li>
+    <li>Collignon</li>
+    <li>Miton</li>
+    <li>21 years old</li>
+    <li>remi.collignon@anemail.com</li>
+  </ul>
+
+  <h3>Title 3</h3>
+  <ul>
+    <li>Gilles</li>
+    <li>Biannic</li>
+    <li>GillouBZH</li>
+    <li>20 years old</li>
+    <li>gilles.biannic@anemail.com</li>
+  </ul>
+</div>
+        </article>
+    </main>
+
+    <footer>
+  <div class="inner">
+    <p>A project of <a href="http://vincentriouallon.com/" target="_blank">Riouallon Vincent</a></p>
+  </div>
+</footer>
+</div>
+</body>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../js/script.js" type="text/javascript"></script>
+    <script src="../js/TextToInput.js" type="text/javascript"></script>
+      <script src="../js/zclip.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+      $('#MyTableLockValue').TextToInput({
+        mainButtonDiv  : "#tableMainButton",
+        controleUniqueButton : false
+      });
+      $('#basicList').TextToInput({
+    mainButtonDiv  : "#basicList div:nth-child(1)",
+    notChange : "#basicList ul li:nth-child(odd)"
+      });
+    </script>
+
+</html>
