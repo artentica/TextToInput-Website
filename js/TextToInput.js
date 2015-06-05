@@ -51,7 +51,7 @@ $.fn.TextToInput = function(definitionAction){
             tdpersonnalised.ErrorSend();
         });},
   };
-
+console.log($(this));
     //Definition of the version
     TextToInput_defaultSettings.VERSION  = '2.0.0';
 

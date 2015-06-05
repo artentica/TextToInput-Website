@@ -186,7 +186,7 @@ Ceci se passe de commentaire.
 
 <div class="together">
 <div class="highlight">
-  <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div </span><span class="k">id</span><span class="nb">=</span><span class="s">"basicTableDataNoID"</span><span class="nt">&gt;
+  <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div </span><span class="k">id</span><span class="nb">=</span><span class="s">"basicTableDataID"</span><span class="nt">&gt;
   &lt;div&gt;&lt;/div&gt;
   &lt;table </span><span class="k">class</span><span class="nb">=</span><span class="s">"table"</span><span class="nt">&gt;
       &lt;thead&gt;
@@ -432,7 +432,7 @@ database.</p>
 </body>
     <script src="../js/jquery.js" type="text/javascript"></script>
     <script src="../js/script.js" type="text/javascript"></script>
-    <script src="../js/TextToInput.js" type="text/javascript"></script>
+    <script src="../js/TextToInputv3.js" type="text/javascript"></script>
       <script src="../js/zclip.js" type="text/javascript"></script>
 
     <script type="text/javascript">
@@ -443,18 +443,22 @@ $('#basicTableDataNoID').TextToInput({
   SendJSON: function (json) {
     $("#basicTableDataNoID .result").empty();
     $("#basicTableDataNoID .result").append(json);
+    $('#basicTableDataNoID').data('TextToInput').resetChange();
   }
 });
 
-$('#basicTableDataID').TextToInput({
+
+var test = $('#basicTableDataID').TextToInput({
   mainButtonDiv : "#basicTableDataID div:nth-child(1)",
   PrecisedFieldDB : true,
   IDDB: ".IDDB",
   SendJSON: function (json) {
     $("#basicTableDataID .result").empty();
     $("#basicTableDataID .result").append(json);
+    $('#basicTableDataID').data('TextToInput').resetChange();
   }
 });
+
 
 $('#basicTableNoDataID').TextToInput({
   mainButtonDiv : "#basicTableNoDataID div:nth-child(1)",
@@ -473,6 +477,8 @@ $('#basicTableNoDataNoID').TextToInput({
     $("#basicTableNoDataNoID .result").append(json);
   }
 });
+
+
     </script>
 
 </html>
