@@ -163,8 +163,7 @@ Ceci se passe de commentaire.
 </div>
 
   </div>
-  <p style="margin-top:15px"><span style="font-weight: 700;">Warning:</span> The red text does not resets because resetChanges() function is not called, go to the "SendJSON" to see how to remedy that.</p>
-
+  <p style="margin-top:15px"><span style="font-weight: 700;">Warning:</span> The red text does not resets because resetChanges() function is not called, go to the "SendJSON" to see how to remedy that. Or to the "resetChange" to see what does this function.</p>
 
  <p style="margin-top:35px">Here you have an example of a table with database fields and an identifier.</p>
 
@@ -179,7 +178,7 @@ Ceci se passe de commentaire.
 </div>
 <p><span style="font-weight: 700;">Warning:</span> If you specify a class as being the identifier of your data you should specify it on each line. Give it a class is to declare the systematic use of an identifier in the current TextToInput object.</p>
 
-<p style="margin-top:15px"><span style="font-weight: 700;">Trick:</span> Si vous voulez mettre l'identifiant mais qu'il ne s'affiche pas vous pouvez le mettre en "display:none".</p>
+<p style="margin-top:15px"><span style="font-weight: 700;">Trick:</span> If you want to put the ID but it does not appear you can set "display:none".</p>
 
 <p style="margin-top:15px"><span style="font-weight: 700;">Reminder:</span> The class will be a IDDB "LockValue" unless you change the code the user can not change its value. For more information see the "Specific Class".</p>
 
@@ -443,7 +442,6 @@ $('#basicTableDataNoID').TextToInput({
   SendJSON: function (json) {
     $("#basicTableDataNoID .result").empty();
     $("#basicTableDataNoID .result").append(json);
-    $('#basicTableDataNoID').data('TextToInput').resetChange();
   }
 });
 
@@ -455,7 +453,6 @@ var test = $('#basicTableDataID').TextToInput({
   SendJSON: function (json) {
     $("#basicTableDataID .result").empty();
     $("#basicTableDataID .result").append(json);
-    $('#basicTableDataID').data('TextToInput').resetChange();
   }
 });
 

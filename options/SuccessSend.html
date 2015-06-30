@@ -38,7 +38,7 @@ Ceci se passe de commentaire.
     <a href="" class="onpage">TextToInput</a>
     <h3 class="subheading">Options</h3>
     <ul>
-      <li><a href="options/mainButtonsdiv.html">SendJSON</a></li>
+      <li><a href="options/mainButtonsdiv.html">SuccessSend</a></li>
       <li><a>Type of control</a></li>
       <li><a>Lock Values</a></li>
       <li><a>Class Buttons</a></li>
@@ -54,7 +54,7 @@ Ceci se passe de commentaire.
     <ul>
       <li><a>SendJSON</a></li>
       <li><a>ErrorSend</a></li>
-      <li><a>SuccesSend</a></li>
+      <li><a>SuccessSend</a></li>
     </ul>
   </li>
 
@@ -194,6 +194,9 @@ $('#basicTableModified').TextToInput({
   SendJSON: function (json) {
     $("#basicTableModified .result").empty();
     $("#basicTableModified .result").append(json);
+    SuccessSend();
+  },
+  SuccessSend: function () {
     $('#basicTableModified').data('TextToInput').resetChange();
   }
 });

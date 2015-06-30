@@ -49,9 +49,10 @@ $.fn.TextToInput = function(definitionAction){
             resetChange();
         }).error(function(){
             tdpersonnalised.ErrorSend();
-        });},
+        });
+    },
   };
-console.log($(this));
+
     //Definition of the version
     TextToInput_defaultSettings.VERSION  = '2.0.0';
 
@@ -325,7 +326,6 @@ $(this).find("td"+tdpersonnalised.UpdatedVal,"li"+tdpersonnalised.UpdatedVal).no
             object = {};
         });
         JsonForString(infos);
-        console.log(infos);
     }
 
     function JsonForString(infos){
@@ -343,13 +343,6 @@ $(this).find("td"+tdpersonnalised.UpdatedVal,"li"+tdpersonnalised.UpdatedVal).no
             DisableSaveBDDButton(temp);
         });
     }
-
-
-
-
-
-
-
 
 
 

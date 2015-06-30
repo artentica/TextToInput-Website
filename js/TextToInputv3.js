@@ -38,7 +38,7 @@
             link : "index.html",
             myTable : $(element),
             saveOnChange:true,
-            SuccesSend: function () {alert("Sending information success")},
+            SuccessSend: function () {alert("Sending information success")},
             ErrorSend: function () {alert("Sending information error")},
             SendJSON: function (json) {
                 $.ajax({
@@ -46,7 +46,7 @@
                     url: plugin.tdpersonnalised.link,
                     data: json,
                 }).success(function(){
-                    plugin.tdpersonnalised.SuccesSend();
+                    plugin.tdpersonnalised.SuccessSend();
                     resetChange();
                 }).error(function(){
                     plugin.tdpersonnalised.ErrorSend();
@@ -249,7 +249,6 @@
                 }
 
                 var value_new = $(this).attr("data-oldVal");
-               // console.log(value_new);
                 old[String(id)] = value_new;
             });
             var temp = new Array(old,object);
@@ -278,7 +277,7 @@ $(this).find("td"+plugin.tdpersonnalised.UpdatedVal,"li"+plugin.tdpersonnalised.
             object = {};
         });
         JsonForString(infos);
-        console.log(infos);
+        //console.log(infos);
     }
 
     function buildNOData(){
@@ -292,7 +291,7 @@ $(this).find("td"+plugin.tdpersonnalised.UpdatedVal,"li"+plugin.tdpersonnalised.
                   object[String(i)] = value;
                 }
                 var value_new = $(this).attr("data-oldVal");
-                console.log(value_new);
+                //console.log(value_new);
                 old[String(i)] = value_new;
             });
             var temp = new Array(old,object);
@@ -399,8 +398,32 @@ $(this).find("td"+plugin.tdpersonnalised.UpdatedVal,"li"+plugin.tdpersonnalised.
 
         }
 
-        plugin.resetChange = function() {
 
+
+        //////////////TEST////////////////:
+
+
+
+        plugin.tdpersonnalised.SuccessSend = function() {
+          alert("Sending information success");
+        }
+
+
+
+
+
+
+
+
+        ////////////////////////////////////
+
+
+
+
+
+
+
+        plugin.resetChange = function() {
         plugin.tdpersonnalised.myTable.find(plugin.tdpersonnalised.ToUpdateLine).each(function(){
             $(this).find(plugin.tdpersonnalised.UpdatedVal).each(function(){
                 $(this).removeClass(plugin.tdpersonnalised.UpdatedVal.replace(".",""));
