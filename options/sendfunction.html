@@ -38,24 +38,26 @@ Ceci se passe de commentaire.
     <a href="" class="onpage">TextToInput</a>
     <h3 class="subheading">Options</h3>
     <ul>
-      <li><a href="options/mainButtonsdiv.html">SendJSON</a></li>
-      <li><a>Type of control</a></li>
-      <li><a>Lock Values</a></li>
-      <li><a>Class Buttons</a></li>
-      <li><a>Icons Buttons</a></li>
-      <li><a>Text Bttons</a></li>
-      <li><a>Title Buttons</a></li>
-      <li><a>dataBDD</a></li>
-      <li><a>Target Link</a></li>
-      <li><a>Specific Class</a></li>
+      <li><a href="mainButtonsdiv.html">Main Buttons div</a></li>
+      <li><a href="typeOfControl.html">Type of control</a></li>
+      <li><a href="LockValue.html">Lock Values</a></li>
+      <li><a href="ClassButtons.html">Class Buttons</a></li>
+      <li><a href="Icons.html">Icons Buttons</a></li>
+      <li><a href="TextButtons.html">Text Bttons</a></li>
+      <li><a href="TitleButtons.html">Title Buttons</a></li>
+      <li><a href="dataDB.html">dataDB</a></li>
+      <li><a href="TargetLink.html">Target Link</a></li>
+      <li><a href="SpecificClass.html">Specific Class</a></li>
 
     </ul>
     <h3 class="subheading">Functions</h3>
     <ul>
-      <li><a>SendJSON</a></li>
-      <li><a>ErrorSend</a></li>
-      <li><a>SuccesSend</a></li>
+      <li><a href="sendfunction.html">SendJSON</a></li>
+      <li><a href="ErrorSend.html">ErrorSend</a></li>
+      <li><a href="SuccessSend.html">SuccessSend</a></li>
+      <li><a href="resetChange.html">resetChange</a></li>
     </ul>
+
   </li>
 
 </ul>
@@ -64,9 +66,11 @@ Ceci se passe de commentaire.
           <h2>SendJSON Function options</h2>
 
           <p style="margin-top:25px">This function will make an ajax sends data to the page of your choice with the "TargetLink" you gave him. Alternatively, you can overload this function if you want to make another use.</p>
+          <p style="margin-top:15px"><span style="font-weight: 700;">Warning:</span> If you overload this function you will <span style="font-weight: 700;">not</span> be able to use the functions "SuccessSend" or "ErrorSend".</p>
+
     <div class="reference">
-  <h3>Variable</h3>
-  <p><code></code></p>
+  <h3>Function</h3>
+  <p><code>SendJSON: function (json) {}</code></p>
   <h3>Default</h3>
   <p><pre style="background-color:initial;border:none;"><code>function (json) {
         $.ajax({

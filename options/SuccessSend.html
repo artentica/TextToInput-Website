@@ -38,52 +38,44 @@ Ceci se passe de commentaire.
     <a href="" class="onpage">TextToInput</a>
     <h3 class="subheading">Options</h3>
     <ul>
-      <li><a href="options/mainButtonsdiv.html">SuccessSend</a></li>
-      <li><a>Type of control</a></li>
-      <li><a>Lock Values</a></li>
-      <li><a>Class Buttons</a></li>
-      <li><a>Icons Buttons</a></li>
-      <li><a>Text Bttons</a></li>
-      <li><a>Title Buttons</a></li>
-      <li><a>dataBDD</a></li>
-      <li><a>Target Link</a></li>
-      <li><a>Specific Class</a></li>
+      <li><a href="mainButtonsdiv.html">Main Buttons div</a></li>
+      <li><a href="typeOfControl.html">Type of control</a></li>
+      <li><a href="LockValue.html">Lock Values</a></li>
+      <li><a href="ClassButtons.html">Class Buttons</a></li>
+      <li><a href="Icons.html">Icons Buttons</a></li>
+      <li><a href="TextButtons.html">Text Bttons</a></li>
+      <li><a href="TitleButtons.html">Title Buttons</a></li>
+      <li><a href="dataDB.html">dataDB</a></li>
+      <li><a href="TargetLink.html">Target Link</a></li>
+      <li><a href="SpecificClass.html">Specific Class</a></li>
 
     </ul>
     <h3 class="subheading">Functions</h3>
     <ul>
-      <li><a>SendJSON</a></li>
-      <li><a>ErrorSend</a></li>
-      <li><a>SuccessSend</a></li>
+      <li><a href="sendfunction.html">SendJSON</a></li>
+      <li><a href="ErrorSend.html">ErrorSend</a></li>
+      <li><a href="SuccessSend.html">SuccessSend</a></li>
+      <li><a href="resetChange.html">resetChange</a></li>
     </ul>
   </li>
 
 </ul>
 
         <article>
-          <h2>SendJSON Function options</h2>
+          <h2>SuccessSend Function options</h2>
 
-          <p style="margin-top:25px">This function will make an ajax sends data to the page of your choice with the "TargetLink" you gave him. Alternatively, you can overload this function if you want to make another use.</p>
+          <p style="margin-top:25px">This function be called by the default SendJSON function if the ajax succeeded in sending the json.</p>
     <div class="reference">
   <h3>Variable</h3>
   <p><code></code></p>
   <h3>Default</h3>
-  <p><pre style="background-color:initial;border:none;"><code>function (json) {
-        $.ajax({
-          type: "POST",
-          url: plugin.tdpersonnalised.link,
-          data: json,
-        }).success(function(){
-          plugin.tdpersonnalised.SuccesSend();
-          resetChange();
-        }).error(function(){
-          plugin.tdpersonnalised.ErrorSend();
-        });
+  <p><pre style="background-color:initial;border:none;"><code>function(json) {
+  alert("Sending information success");
 }</code></pre></p>
   <h3>Possible Values</h3>
   <p>Any function</p>
 </div>
-<p style="margin-top:25px">You can make the function of your choice, you can use the variable "json" which contains the data to send. To see an example of function overloading you can see those of dataDB page or the examples below.</p>
+
 
 
 
@@ -125,10 +117,12 @@ Ceci se passe de commentaire.
 <div class="highlight">
   <pre><code class="language-html" data-lang="html"><span class="nb">$(</span><span class="s">'#basicTableModified'</span><span class="nb">).</span><span class="k">TextToInput</span><span class="nb">({</span>
     <span class="k">mainButtonDiv</span> <span class="nb">: </span><span class="s">"#basicTableModified div:nth-child(1)"</span><span class="nb">,</span>
-    <span class="k">SendJSON</span><span class="nb">: </span><span class="k">function</span><span class="nb"> (json) { </span><span class="c1">//I overload the send function of the data so that the outcome is displayed in a div</span>
+    <span class="k">link</span> <span class="nb">: </span><span class="s">"#"</span><span class="nb">,</span>
+    <span class="k">SuccessSend</span><span class="nb">: </span><span class="k">function</span><span class="nb"> (json) { </span><span class="c1">//I overload the success function so that the outcome is displayed in a green</span>
       <span class="nb">$(</span><span class="s">"#basicTableModified .result"</span><span class="nb">).</span><span class="k">empty</span><span class="nb">();</span>
       <span class="nb">$(</span><span class="s">"#basicTableModified .result"</span><span class="nb">).</span><span class="k">append</span><span class="nb">(json);</span>
-      <span class="nb">$(</span><span class="s">"#basicTableModified"</span><span class="nb">).</span><span class="k">data</span><span class="nb">(</span><span class="s">'TextToInput'</span><span class="nb">).</span><span class="k">resetChange</span><span class="nb">();
+      <span class="nb">$(</span><span class="s">"#basicTableModified"</span><span class="nb">).</span><span class="k">data</span><span class="nb">(</span><span class="s">'TextToInput'</span><span class="nb">).</span><span class="k">resetChange</span><span class="nb">();</span>
+      <span class="nb">$(</span><span class="s">"#basicTableModified"</span><span class="nb">).</span><span class="k">attr</span><span class="nb">(</span><span class="s">"style"</span><span class="nb">,</span><span class="s">"background-color:#8FBC8F"</span><span class="nb">);
     }
 });</span></code></pre>
 </div>
@@ -170,7 +164,6 @@ Ceci se passe de commentaire.
 
 
 
-
           </article>
     </main>
 
@@ -191,13 +184,13 @@ Ceci se passe de commentaire.
 
 $('#basicTableModified').TextToInput({
   mainButtonDiv : "#basicTableModified div:nth-child(1)",
-  SendJSON: function (json) {
+  link : "#",
+  SuccessSend: function (json) {
+    console.log(json);
     $("#basicTableModified .result").empty();
     $("#basicTableModified .result").append(json);
-    SuccessSend();
-  },
-  SuccessSend: function () {
     $('#basicTableModified').data('TextToInput').resetChange();
+    $("#basicTableModified .result").attr("style","background-color:#8FBC8F");
   }
 });
     </script>

@@ -37,19 +37,20 @@
             notChange : ".lockValue",
             link : "index.html",
             myTable : $(element),
+            json:"",
             saveOnChange:true,
-            SuccessSend: function () {alert("Sending information success")},
-            ErrorSend: function () {alert("Sending information error")},
+            SuccessSend: function (json) {alert("Sending information success")},
+            ErrorSend: function (json) {alert("Sending information error")},
             SendJSON: function (json) {
                 $.ajax({
                     type: "POST",
                     url: plugin.tdpersonnalised.link,
                     data: json,
                 }).success(function(){
-                    plugin.tdpersonnalised.SuccessSend();
+                    plugin.tdpersonnalised.SuccessSend(plugin.tdpersonnalised.json);
                     resetChange();
                 }).error(function(){
-                    plugin.tdpersonnalised.ErrorSend();
+                    plugin.tdpersonnalised.ErrorSend(plugin.tdpersonnalised.json);
                 });
             }
         }
@@ -324,6 +325,7 @@ $(this).find("td"+plugin.tdpersonnalised.UpdatedVal,"li"+plugin.tdpersonnalised.
 
     function JsonForString(infos){
         var json = JSON.stringify(infos);
+        plugin.tdpersonnalised.json=json;
         plugin.tdpersonnalised.SendJSON(json);
     }
 
@@ -400,34 +402,12 @@ $(this).find("td"+plugin.tdpersonnalised.UpdatedVal,"li"+plugin.tdpersonnalised.
 
 
 
-        //////////////TEST////////////////:
-
-
-
-        plugin.tdpersonnalised.SuccessSend = function() {
-          alert("Sending information success");
-        }
-
-
-
-
-
-
-
-
-        ////////////////////////////////////
-
-
-
-
-
-
 
         plugin.resetChange = function() {
         plugin.tdpersonnalised.myTable.find(plugin.tdpersonnalised.ToUpdateLine).each(function(){
             $(this).find(plugin.tdpersonnalised.UpdatedVal).each(function(){
                 $(this).removeClass(plugin.tdpersonnalised.UpdatedVal.replace(".",""));
-                console.log($(this));
+                //console.log($(this));
                 $(this).removeAttr( "data-oldval" );
             });
             $(this).removeClass(plugin.tdpersonnalised.ToUpdateLine.replace(".",""));
