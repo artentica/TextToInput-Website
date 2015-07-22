@@ -1,3 +1,7 @@
+$('.subsection-nav.api-nav.on-waypoint').click(function(){
+  $('.subsection-nav.api-nav.on-waypoint').toggleClass("expanded");
+});
+
 function centerMain() {
     var footer = $('footer');
     var header = $('header');
